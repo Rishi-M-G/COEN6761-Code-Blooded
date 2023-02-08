@@ -137,23 +137,13 @@ public class Robot{
 	}
 	
 	
-	public int[] currentPosition() {
+	public void currentPosition() {
 		System.out.println("Position: "+x + "," + y + " - Pen: " + penStatus+" - Facing: "+Direction);	
-		int[] z=new int[]{x,y};
-		return z;
 	}
 	
 	
-	public boolean penUp() {
+	public void penUp() {
 		penStatus = "up";
-		if (penStatus== "up")
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
 	}
 	
 	
