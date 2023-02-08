@@ -82,12 +82,14 @@ public class Robot{
 			}
 		}
 	}
+	
+	
 	public void initializeArrayFloor(int n) {
 		// Initializing the array
-		//System.out.println("Please Enter Array Dimension Value");
-		//N = sc.nextInt();
+		// System.out.println("Please Enter Array Dimension Value");
+		// N = sc.nextInt();
 		N = n;
-		if(N < 0 )
+		if( N < 0 )
 		{
 			System.out.println("Invalid Number. Array Dimension should be a Positive Value");
 		}
@@ -122,7 +124,7 @@ public class Robot{
 				if(floor[j][i] == 1)
 					System.out.print("*  ");
 				else
-					System.out.print("  ");
+					System.out.print("   ");
 			}
 			System.out.println();
 		}
@@ -130,7 +132,7 @@ public class Robot{
 		System.out.print("   ");
 		for(int k = 0;k<N;k++)
 		{
-			System.out.print(k+" ");
+			System.out.print(k+"  ");
 		}
 	}
 	
@@ -204,10 +206,11 @@ public class Robot{
 		{
 			if(Direction == "north" && (y+s < N)) 
 			{
+				int m = y;
 				y = y + s; // Setting new coordinates
 				if(penStatus == "down")
 				{
-					for(int l=0;l<=y;l++)
+					for(int l=m;l<=y;l++)
 					{
 						floor[x][l] = 1;
 					}
@@ -215,10 +218,11 @@ public class Robot{
 			}
 			else if(Direction == "east" && (x+s < N))
 			{
+				int m = x;
 				x = x + s;
 				if(penStatus == "down")
 				{
-					for(int l=0;l<=x;l++)
+					for(int l=m;l<=x;l++)
 					{
 						floor[l][y] = 1;
 					}
@@ -226,10 +230,11 @@ public class Robot{
 			}
 			else if(Direction == "west" && (x-s > 0))
 			{
+				int m = x;
 				x = x - s;
 				if(penStatus == "down")
 				{
-					for(int l=0;l<=y;l++)
+					for(int l=m;l<=y;l++)
 					{
 						floor[l][y] = 1;
 					}
@@ -237,10 +242,11 @@ public class Robot{
 			}
 			else if(Direction == "south" && (y-s > 0))
 			{
+				int m = y;
 				y = y - s;
 				if(penStatus == "down")
 				{
-					for(int l=0;l<=y;l++)
+					for(int l=m;l<=y;l++)
 					{
 						floor[x][l] = 1;
 					}
@@ -251,6 +257,4 @@ public class Robot{
 			}
 		}
 	}
-	
-	
 }
