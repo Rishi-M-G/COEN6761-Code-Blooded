@@ -181,5 +181,11 @@ public class AppTest
 		robot.currentPosition();
 		assertEquals("Position: 0,2 - Pen: down - Facing: north", output.toString().trim()); // current position after initializing
 		assertEquals(1,robot.floor[0][2]);
-	}	
+	}
+	
+	@Test
+	public void testExitProgram() {
+		robot.quit();
+		assertTrue(robot.isProgramEnded());
+	}
 }
