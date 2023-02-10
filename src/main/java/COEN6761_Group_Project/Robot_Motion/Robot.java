@@ -4,12 +4,12 @@ import java.util.Scanner;
 
 public class Robot{
 	Scanner sc = new Scanner(System.in);
-	private int[][] floor; // Declaring Floor
-	private String penStatus; // Pen Up or Pen Down
-	private int x,y; // Robot's Current Position
-	private int N;
-	private int s;
-	private String Direction;
+	int[][] floor; // Declaring Floor
+	String penStatus; // Pen Up or Pen Down
+	int x,y; // Robot's Current Position
+	int N;
+	int s;
+	String Direction;
 	
 	public void command() {
 		//Command System
@@ -196,11 +196,12 @@ public class Robot{
 		System.exit(0);
 	}
 	
-	public void moveForward(int S) {
+	public boolean moveForward(int S) {
 		s = S;
 		if((s<0 || s>=N) == true)
 		{
 			System.out.println("'s' should be a positive number and should be within the Floor");
+			return false;
 		}
 		else
 		{
@@ -254,7 +255,9 @@ public class Robot{
 			}
 			else {
 				System.out.println("Robot Cannot leave the floor");
+				return false;
 			}
 		}
+		return true;
 	}
 }
