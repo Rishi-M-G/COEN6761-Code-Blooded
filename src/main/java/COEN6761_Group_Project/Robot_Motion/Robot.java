@@ -10,6 +10,7 @@ public class Robot{
 	int N;
 	int s;
 	String Direction;
+	boolean programEnded;
 	
 	public void command() {
 		//Command System
@@ -86,8 +87,6 @@ public class Robot{
 	
 	public void initializeArrayFloor(int n) {
 		// Initializing the array
-		// System.out.println("Please Enter Array Dimension Value");
-		// N = sc.nextInt();
 		N = n;
 		if( N < 0 )
 		{
@@ -190,12 +189,6 @@ public class Robot{
 	}
 	
 	
-	public void quit() {
-		// Program Termination
-		System.out.println("ROBOT MOTION TERMINATED");
-		System.exit(0);
-	}
-	
 	public boolean moveForward(int S) {
 		s = S;
 		if((s<0 || s>=N) == true)
@@ -259,5 +252,16 @@ public class Robot{
 			}
 		}
 		return true;
+	}
+	
+
+	public void quit() {
+		// Program Termination
+		System.out.println("ROBOT MOTION TERMINATED");
+		System.exit(0);
+	}
+	
+	public boolean isProgramEnded() {
+		return this.programEnded;
 	}
 }
