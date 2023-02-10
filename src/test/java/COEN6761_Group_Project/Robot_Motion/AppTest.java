@@ -4,6 +4,8 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import static org.junit.Assert.*;
+
 /**
  * Unit test for simple App.
  */
@@ -12,12 +14,16 @@ public class AppTest
     /**
      * Rigorous Test :-)
      */
+    int n = 5;
+    private Robot robot = new Robot();
+    //private int[][] floor = new int[n][n];
+    
     @Test
     public void shouldAnswerWithTrue()
     {
         assertTrue( true );
     }
-      @Test
+    @Test
     public void testInitializeSystem() {
         robot.initializeArrayFloor(10);
         assertTrue(robot.penUp()==true);
@@ -34,4 +40,5 @@ public class AppTest
         assertArrayEquals(new int[] {4, 0}, robot.currentPosition()); // current position after moving forward
         assertEquals(1, robot.floor[0][4]); //return true if y,x values = [x],[y]
   }
+   
 }
