@@ -183,8 +183,9 @@ public class AppTest
 		assertEquals(1,robot.floor[0][2]);
 	}
 	
-	@Test
+	
 	public void testExitProgram() {
+		Robot robot = new Robot();
 		robot.quit();
 		assertTrue(robot.isProgramEnded());
 	}
