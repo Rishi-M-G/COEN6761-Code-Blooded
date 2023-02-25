@@ -29,7 +29,7 @@ public class Robot{
 		 */
 		
 		
-		for(;;)
+		while(true) // Infinite loop until command 'q'
 		{
 			System.out.println();
 			System.out.println("Please enter your command");
@@ -79,6 +79,9 @@ public class Robot{
 			case 'm':
 				num = Integer.parseInt(parts[1]);
 				moveForward(num);
+				break;
+			default:
+				System.out.println("Invalid Command, Please enter a valid command");
 				break;
 			}
 		}
@@ -222,7 +225,7 @@ public class Robot{
 					}
 				}
 			}
-			else if(Direction == "west" && (x-s > 0))
+			else if(Direction == "west" && (x-s >= 0))
 			{
 				int m = x;
 				x = x - s;
@@ -234,7 +237,7 @@ public class Robot{
 					}
 				}
 			}
-			else if(Direction == "south" && (y-s > 0))
+			else if(Direction == "south" && (y-s >= 0))
 			{
 				int m = y;
 				y = y - s;
