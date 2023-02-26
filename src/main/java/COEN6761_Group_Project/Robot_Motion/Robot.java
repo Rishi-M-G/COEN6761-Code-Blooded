@@ -73,8 +73,8 @@ public class Robot{
 				break;
 			case 'Q':
 			case 'q':
-				quit();
-				break;
+				System.out.println(quit());
+				return;
 			case 'M':
 			case 'm':
 				num = Integer.parseInt(parts[1]);
@@ -258,13 +258,9 @@ public class Robot{
 	}
 	
 
-	public void quit() {
-		// Program Termination
-		System.out.println("ROBOT MOTION TERMINATED");
-		System.exit(0);
+	public String quit() {
+		return "ROBOT MOTION TERMINATED";
 	}
 	
-	public boolean isProgramEnded() {
-		return this.programEnded;
-	}
+	
 }
