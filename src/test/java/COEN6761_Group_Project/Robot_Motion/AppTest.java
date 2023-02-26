@@ -2,9 +2,14 @@ package COEN6761_Group_Project.Robot_Motion;
 
 import static org.junit.Assert.assertTrue;
 import java.io.ByteArrayOutputStream;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.Scanner;
+
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
+
 
 /**
  * Unit test for simple App.
@@ -15,7 +20,10 @@ public class AppTest
      * Rigorous Test :-)
      */
 	
+	
 	Robot robot = new Robot(); // instance of Robot Class
+	
+	
 	
 	@Test
 	public void testTurnRight()
@@ -160,33 +168,160 @@ public class AppTest
 	
 	@Test
     public void testInitializeSystem() {
-		ByteArrayOutputStream output = new ByteArrayOutputStream();
-	    System.setOut(new PrintStream(output));
+		
+		ByteArrayOutputStream output1 = new ByteArrayOutputStream();
+	    System.setOut(new PrintStream(output1));
+	    robot.initializeArrayFloor(-1);
+		assertEquals("Invalid Number. Array Dimension should be a Positive Value",output1.toString().trim());
+		
+		ByteArrayOutputStream output2 = new ByteArrayOutputStream();
+	    System.setOut(new PrintStream(output2));
 		
 		robot.initializeArrayFloor(n);
         assertEquals("up",robot.penStatus);
         assertEquals(0, robot.floor[0][0]); //return true if y,x values = [x],[y]
         robot.currentPosition();
-        assertEquals("Position: 0,0 - Pen: up - Facing: north", output.toString().trim()); // current position after initializing
+        assertEquals("Position: 0,0 - Pen: up - Facing: north", output2.toString().trim()); // current position after initializing
 	}
 	
 	@Test
-	public void testMoveForward() {
-		ByteArrayOutputStream output = new ByteArrayOutputStream();
-	    System.setOut(new PrintStream(output));
+	public void testMoveForwardPenDown() {
+		ByteArrayOutputStream output1 = new ByteArrayOutputStream();
+	    System.setOut(new PrintStream(output1));
 		
 		robot.initializeArrayFloor(n);
 		robot.penDown();
+		
+		robot.moveForward(-1);
+		assertEquals("'s' should be a positive number and should be within the Floor", output1.toString().trim());
+		
+		ByteArrayOutputStream output2 = new ByteArrayOutputStream();
+	    System.setOut(new PrintStream(output2));
 		robot.moveForward(s);
 		robot.currentPosition();
-		assertEquals("Position: 0,2 - Pen: down - Facing: north", output.toString().trim()); // current position after initializing
+		assertEquals("Position: 0,2 - Pen: down - Facing: north", output2.toString().trim()); // current position after initializing
 		assertEquals(1,robot.floor[0][2]);
+		
+		ByteArrayOutputStream output3 = new ByteArrayOutputStream();
+	    System.setOut(new PrintStream(output3));
+		robot.moveForward(3);
+		assertEquals("Robot Cannot leave the floor",output3.toString().trim());
+		
+		ByteArrayOutputStream output4 = new ByteArrayOutputStream();
+	    System.setOut(new PrintStream(output4));
+	    robot.turnRight();
+		robot.moveForward(s);
+		robot.currentPosition();
+		assertEquals("Position: 2,2 - Pen: down - Facing: east", output4.toString().trim()); // current position after initializing
+		assertEquals(1,robot.floor[2][2]);
+		
+		ByteArrayOutputStream output5 = new ByteArrayOutputStream();
+	    System.setOut(new PrintStream(output5));
+		robot.moveForward(3);
+		assertEquals("Robot Cannot leave the floor",output5.toString().trim());
+		
+		ByteArrayOutputStream output6 = new ByteArrayOutputStream();
+	    System.setOut(new PrintStream(output6));
+	    robot.turnLeft();
+	    robot.turnLeft();
+		robot.moveForward(s);
+		robot.currentPosition();
+		assertEquals("Position: 0,2 - Pen: down - Facing: west", output6.toString().trim()); // current position after initializing
+		assertEquals(1,robot.floor[0][2]);
+		
+		ByteArrayOutputStream output7 = new ByteArrayOutputStream();
+	    System.setOut(new PrintStream(output7));
+		robot.moveForward(1);
+		assertEquals("Robot Cannot leave the floor",output7.toString().trim());
+		
+		ByteArrayOutputStream output8 = new ByteArrayOutputStream();
+	    System.setOut(new PrintStream(output8));
+	    robot.turnLeft();
+		robot.moveForward(1);
+		robot.currentPosition();
+		assertEquals("Position: 0,1 - Pen: down - Facing: south", output8.toString().trim()); // current position after initializing
+		assertEquals(1,robot.floor[0][1]);
+		
+		ByteArrayOutputStream output9 = new ByteArrayOutputStream();
+	    System.setOut(new PrintStream(output9));
+		robot.moveForward(2);
+		assertEquals("Robot Cannot leave the floor",output9.toString().trim());
 	}
 	
+	@Test
+	public void testMoveForwardPenUp() {
+		ByteArrayOutputStream output1 = new ByteArrayOutputStream();
+	    System.setOut(new PrintStream(output1));
+		
+		robot.initializeArrayFloor(n);
+		robot.penUp();
+		
+		robot.moveForward(-1);
+		assertEquals("'s' should be a positive number and should be within the Floor", output1.toString().trim());
+		
+		ByteArrayOutputStream output2 = new ByteArrayOutputStream();
+	    System.setOut(new PrintStream(output2));
+		robot.moveForward(s);
+		robot.currentPosition();
+		assertEquals("Position: 0,2 - Pen: up - Facing: north", output2.toString().trim()); // current position after initializing
+		assertEquals(0,robot.floor[0][2]);
+		
+		ByteArrayOutputStream output3 = new ByteArrayOutputStream();
+	    System.setOut(new PrintStream(output3));
+		robot.moveForward(3);
+		assertEquals("Robot Cannot leave the floor",output3.toString().trim());
+		
+		ByteArrayOutputStream output4 = new ByteArrayOutputStream();
+	    System.setOut(new PrintStream(output4));
+	    robot.turnRight();
+		robot.moveForward(s);
+		robot.currentPosition();
+		assertEquals("Position: 2,2 - Pen: up - Facing: east", output4.toString().trim()); // current position after initializing
+		assertEquals(0,robot.floor[2][2]);
+		
+		ByteArrayOutputStream output5 = new ByteArrayOutputStream();
+	    System.setOut(new PrintStream(output5));
+		robot.moveForward(3);
+		assertEquals("Robot Cannot leave the floor",output5.toString().trim());
+		
+		ByteArrayOutputStream output6 = new ByteArrayOutputStream();
+	    System.setOut(new PrintStream(output6));
+	    robot.turnLeft();
+	    robot.turnLeft();
+		robot.moveForward(s);
+		robot.currentPosition();
+		assertEquals("Position: 0,2 - Pen: up - Facing: west", output6.toString().trim()); // current position after initializing
+		assertEquals(0,robot.floor[0][2]);
+		
+		ByteArrayOutputStream output7 = new ByteArrayOutputStream();
+	    System.setOut(new PrintStream(output7));
+		robot.moveForward(1);
+		assertEquals("Robot Cannot leave the floor",output7.toString().trim());
+		
+		ByteArrayOutputStream output8 = new ByteArrayOutputStream();
+	    System.setOut(new PrintStream(output8));
+	    robot.turnLeft();
+		robot.moveForward(1);
+		robot.currentPosition();
+		assertEquals("Position: 0,1 - Pen: up - Facing: south", output8.toString().trim()); // current position after initializing
+		assertEquals(0,robot.floor[0][1]);
+		
+		ByteArrayOutputStream output9 = new ByteArrayOutputStream();
+	    System.setOut(new PrintStream(output9));
+		robot.moveForward(2);
+		assertEquals("Robot Cannot leave the floor",output9.toString().trim());
+	}        
 	
+	@Test
 	public void testExitProgram() {
 		Robot robot = new Robot();
-		robot.quit();
-		assertTrue(robot.isProgramEnded());
+		assertEquals("ROBOT MOTION TERMINATED", robot.quit());
 	}
+	
+//	@Test
+//	public void testQuit() {
+//		Robot r1 = new Robot();
+//		assertEquals("ROBOT MOTION TERMINATED", r1.quit());
+//	}
 }
+		
